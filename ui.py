@@ -18,7 +18,7 @@ def load_and_retrieve_docs(url):
     docs = loader.load()
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
     splits = text_splitter.split_documents(docs)
-    embeddings = OllamaEmbeddings(model="nomic-embed-text")
+    embeddings = OllamaEmbeddings(model="mistral")
     vectorstore = Chroma.from_documents(documents=splits, embedding=embeddings)
     return vectorstore.as_retriever()
 
@@ -51,4 +51,4 @@ iface = gr.Interface(
 )
 
 # Launch the app
-iface.launch()
+iface.launch(share=True)
